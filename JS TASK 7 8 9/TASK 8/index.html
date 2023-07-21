@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task8</title>
+</head>
+<body>
+    <script>
+        function findPath(tickets) {
+            const graph = {};
+            for (const [from, to] of tickets) {
+                if (!graph[from]) {
+                    graph[from] = [];
+                }
+                graph[from].push(to);
+            }
+            for (const airport in graph) {
+              graph[airport].sort();
+            }
+            const itinerary = ["A"];
+            function dfs(airport) {
+                const destinations = graph[airport];
+                while (destinations && destinations.length > 0) {
+                    const nextAirport = destinations.shift();
+                    itinerary.push(nextAirport);
+                    dfs(nextAirport);
+                }
+            }
+            dfs("A");
+            return itinerary;
+        }
+    </script>
+    
+</body>
+</html>

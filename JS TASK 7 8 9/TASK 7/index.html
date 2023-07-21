@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 7</title>
+</head>
+<body>
+    <script>
+        function getOverlap(preceding, subsequent) {
+            let maxOverlap = Math.min(preceding.length, subsequent.length);
+            let overlap = "";
+            for (let i = 1; i <= maxOverlap; i++) {
+                let suffix = preceding.slice(-i);
+                let prefix = subsequent.slice(0, i);
+                if (suffix === prefix) {
+                    overlap = suffix;
+                }
+            }
+            return overlap;
+        }
+        function join(words) {
+            let result = words[0]; 
+            let minOverlap = Infinity;
+            for (let i = 1; i < words.length; i++) {
+                const preceding = words[i - 1];
+                const subsequent = words[i];
+                const overlap = getOverlap(preceding, subsequent);
+                result += subsequent.slice(overlap.length);
+                minOverlap = Math.min(minOverlap, overlap.length);
+            }
+            return [result, minOverlap];
+        }
+          
+    </script>
+    
+    
+</body>
+</html>
